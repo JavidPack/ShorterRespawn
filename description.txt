@@ -1,0 +1,3 @@
+﻿Cuts the respawn time after death in Expert Mode to be much closer to Normal Mode times.
+
+When used in conjunction with either HERO's Mod or Cheat Sheet, an toggle button for instant respawns becomes available in the respective menus. When both are loaded, HERO's mod will take precedence since integration with HERO's mod allows for use of the permissions system.

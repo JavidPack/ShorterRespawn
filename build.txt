@@ -1,0 +1,8 @@
+﻿author = jopojelly
+version = 0.2.2
+displayName = Shorter Respawn Time
+homepage = http://forums.terraria.org/index.php?threads/shorter-respawn-time.45962/
+hideCode = false
+hideResources = false
+includeSource = true
+//weakReferences = CheatSheet@0.2.5.1   -- This is a 0.8.2.2 feature.
