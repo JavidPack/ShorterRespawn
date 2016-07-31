@@ -30,7 +30,7 @@ namespace ShorterRespawn
 					//ErrorLogger.Log("Integrating with HEROs Mod");
 					SetupHEROsModIntegration(herosMod);
 				}
-				// If Heros isn't available, try ChearSheet
+				// If Heros isn't available, try CheatSheet
 				else if (cheatSheet != null)
 				{
 					//ErrorLogger.Log("Integrating with Cheat Sheet");
@@ -38,7 +38,7 @@ namespace ShorterRespawn
 				}
 				else
 				{
-					//ErrorLogger.Log("No Integration");
+					// No cheat integration
 				}
 			}
 			catch (Exception e)
@@ -49,7 +49,7 @@ namespace ShorterRespawn
 		}
 
 		// This is the old, not-so-convenient way of doing things, using the Mod.Call method.
-		private void SetupCheatSheetIntegration(Mod cheatSheet)
+		/*private void SetupCheatSheetIntegration(Mod cheatSheet)
 		{
 			if (!Main.dedServ)
 			{
@@ -62,15 +62,17 @@ namespace ShorterRespawn
 				);
 			}
 			instantRespawn = false;
-		}
+		}*/
 
-		// The New way in 0.8.2.2
-		/*
+		// The New way in 0.8.3.1
 		private void SetupCheatSheetIntegration(Mod cheatSheet)
 		{
-			((CheatSheet.CheatSheet)cheatSheet).RegisterButton(GetTexture("InstantRespawnButton"), InstantRespawnButtonPressed, InstantRespawnTooltip);
+			// Don't GetTexture in Server code.
+			if (!Main.dedServ)
+			{
+				CheatSheet.CheatSheetInterface.RegisterButton(cheatSheet, GetTexture("InstantRespawnButton"), InstantRespawnButtonPressed, InstantRespawnTooltip);
+			}
 		}
-		*/
 
 		private void SetupHEROsModIntegration(Mod herosMod)
 		{

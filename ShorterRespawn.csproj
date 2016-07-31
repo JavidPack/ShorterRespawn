@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{72E9B8D1-67E9-4780-ACF4-A3ECA7B31A5B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ShorterRespawn</RootNamespace>
     <AssemblyName>ShorterRespawn</AssemblyName>
@@ -35,7 +35,13 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CheatSheetInterface">
+      <HintPath>lib\CheatSheetInterface.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework">
       <HintPath>..\..\solutiondlls\Microsoft.Xna.Framework.dll</HintPath>
     </Reference>
@@ -56,9 +62,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="tModLoader">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\terraria\tModLoader.exe</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ShorterRespawn.cs" />
@@ -68,18 +71,18 @@
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Documents\My Games\Terraria\ModLoader\Mod Sources\CheatSheet\CheatSheet.csproj">
-      <Project>{04d22e3b-46d1-4647-b350-0ac3aee68631}</Project>
-      <Name>CheatSheet</Name>
+    <ProjectReference Include="..\..\..\Modding\tModLoader\src\tModLoader\Terraria.csproj">
+      <Project>{3996d5fa-6e59-4fe4-9f2b-40eeef9645d5}</Project>
+      <Name>Terraria</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"C:\Program Files (x86)\Steam\steamapps\common\terraria\tModLoader.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
