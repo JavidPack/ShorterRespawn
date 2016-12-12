@@ -1,6 +1,7 @@
 ﻿using Terraria.ModLoader;
 using Terraria;
 using System;
+using Terraria.DataStructures;
 
 namespace ShorterRespawn
 {
@@ -131,7 +132,7 @@ namespace ShorterRespawn
 	// This class is the actual mod code that reduces the respawn timer when the player dies.
 	public class ShorterRespawnPlayer : ModPlayer
 	{
-		public override void Kill(double damage, int hitDirection, bool pvp, string deathText)
+		public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
 		{
 			// If we are cheating
 			if ((mod as ShorterRespawn).instantRespawn)
