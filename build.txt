@@ -1,5 +1,5 @@
 ﻿author = jopojelly
-version = 0.2.3.1
+version = 0.2.4
 displayName = Shorter Respawn Time
 homepage = http://forums.terraria.org/index.php?threads/shorter-respawn-time.45962/
 hideCode = false
@@ -7,4 +7,4 @@ hideResources = false
 includeSource = true
 includePDB = false
 buildIgnore = .vs\*, Properties\*, ignore\*, *.csproj, *.user, obj\*, bin\*, *.config, lib\*, .gitignore
-weakReferences = CheatSheet@0.2.5.9
+weakReferences = CheatSheet@0.2.7
