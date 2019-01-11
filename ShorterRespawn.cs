@@ -4,6 +4,7 @@ using System;
 using Terraria.DataStructures;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using Terraria.ModLoader.Config;
 
 namespace ShorterRespawn
 {
@@ -12,12 +13,19 @@ namespace ShorterRespawn
 		// A true/false value we'll use for the "cheat" functionality of this mod.
 		internal bool instantRespawn = false;
 
-		public ShorterRespawn()
+		internal static ShorterRespawn Instance;
+		internal Mod cheatSheet;
+		internal Mod herosMod;
+		internal const string ModifyPersonalRespawnTime_Permission = "ModifyPersonalRespawnTime";
+		internal const string ModifyPersonalRespawnTime_Display = "Modify Personal Respawn Time";
+		internal const string ModifyGlobalRespawnTime_Permission = "ModifyGlobalRespawnTime";
+		internal const string ModifyGlobalRespawnTime_Display = "Modify Global Respawn Time";
+
+		public override void Load()
 		{
-			Properties = new ModProperties()
-			{
-				Autoload = true, // We need Autoload to be true so our ModPlayer class below will be loaded.
-			};
+			Instance = this;
+			cheatSheet = ModLoader.GetMod("CheatSheet");
+			herosMod = ModLoader.GetMod("HEROsMod");
 		}
 
 		// We integrate with other mods in PostSetupContent.
@@ -25,8 +33,6 @@ namespace ShorterRespawn
 		{
 			try
 			{
-				Mod cheatSheet = ModLoader.GetMod("CheatSheet");
-				Mod herosMod = ModLoader.GetMod("HEROsMod");
 				// Prefer Heros Mod
 				if (herosMod != null)
 				{
@@ -84,9 +90,15 @@ namespace ShorterRespawn
 				// Special string
 				"AddPermission",
 				// Permission Name
-				"ModifyPersonalRespawnTime",
+				ModifyPersonalRespawnTime_Permission,
 				// Permission Display Name
-				"Modify Personal Respawn Time"
+				ModifyPersonalRespawnTime_Display
+			);
+			// This 2nd permission is for changing ModConfig values. non-cheat.
+			herosMod.Call(
+				"AddPermission",
+				ModifyGlobalRespawnTime_Permission,
+				ModifyGlobalRespawnTime_Display
 			);
 			// Add Buttons only to non-servers (otherwise the server will crash, since textures aren't loaded on servers)
 			if (!Main.dedServ)
@@ -95,7 +107,7 @@ namespace ShorterRespawn
 					// Special string
 					"AddSimpleButton",
 					// Name of Permission governing the availability of the button/tool
-					"ModifyPersonalRespawnTime",
+					ModifyPersonalRespawnTime_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
 					GetTexture("InstantRespawnButton"),
 					// A method that will be called when the button is clicked
@@ -137,7 +149,7 @@ namespace ShorterRespawn
 		public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
 		{
 			// If we are cheating
-			if ((mod as ShorterRespawn).instantRespawn)
+			if (ShorterRespawn.Instance.instantRespawn)
 			{
 				player.respawnTimer = 0;
 				return;
@@ -151,7 +163,7 @@ namespace ShorterRespawn
 			ShorterRespawnConfig config = mod.GetConfig<ShorterRespawnConfig>();
 
 			// Reimplement vanilla respawnTimer logic
-			player.respawnTimer = 600;
+			player.respawnTimer = ShorterRespawnConfig.RegularRespawnTimer;
 			bool bossAlive = false;
 			if (Main.netMode != 0 && !pvp)
 			{
@@ -178,48 +190,60 @@ namespace ShorterRespawn
 
 	public class ShorterRespawnConfig : ModConfig
 	{
-		public override MultiplayerSyncMode Mode
-		{
-			get
-			{
-				return MultiplayerSyncMode.ServerDictates;
-			}
-		}
+		public override MultiplayerSyncMode Mode => MultiplayerSyncMode.ServerDictates;
+
+		// Vanilla RespawnTime
+		public const int RegularRespawnTimer = 600;
 
 		[DefaultValue(1f)]
 		[Range(0f, 3f)]
 		[Label("Global Respawn Scale")]
 		public float GlobalRespawnScale;
 
-		[Range(1f, 3f)]
 		[DefaultValue(1.5f)]
+		[Range(1f, 3f)]
+		[Label("Expert Mode Penalty Scale")]
 		public float ExpertPenaltyScale;
 
-		[Range(1f, 3f)]
 		[DefaultValue(2f)]
+		[Range(1f, 3f)]
+		[Label("Boss Penalty Scale")]
+		[Tooltip("By default, deaths during boss fights last twice as long")]
 		public float BossPenaltyScale;
 
-		// Vanilla RespawnTime
-		public const int RegularRespawnTimer = 600;
+		// The 3 fields above are used for the 4 properties below to convey the effect of the players choices.
 
 		[JsonIgnore]
 		[Range(0, 2000)]
 		[Label("Normal Respawn Time in Ticks")]
-		public int NormalRespawn { get { return (int)(GlobalRespawnScale * RegularRespawnTimer); } }
+		[Tooltip("Default time is 600 ticks or 10 seconds")]
+		public int NormalRespawn => (int)(GlobalRespawnScale * RegularRespawnTimer);
 
-		[Range(0, 2000)]
 		[JsonIgnore]
+		[Range(0, 2000)]
 		[Label("Normal Boss Respawn Time in Ticks")]
-		public int NormalBossRespawn { get { return (int)(GlobalRespawnScale * RegularRespawnTimer * BossPenaltyScale); } }
+		public int NormalBossRespawn => (int)(GlobalRespawnScale * RegularRespawnTimer * BossPenaltyScale);
 
 		[JsonIgnore]
 		[Range(0, 2000)]
 		[Label("Expert Respawn Time in Ticks")]
-		internal int ExpertRespawn { get { return (int)(GlobalRespawnScale * RegularRespawnTimer * ExpertPenaltyScale); } }
+		public int ExpertRespawn => (int)(GlobalRespawnScale * RegularRespawnTimer * ExpertPenaltyScale);
 
-		[Range(0, 2000)]
 		[JsonIgnore]
+		[Range(0, 2000)]
 		[Label("Expert Boss Respawn Time in Ticks")]
-		public int ExpertBossRespawn { get { return (int)(GlobalRespawnScale * RegularRespawnTimer * BossPenaltyScale * ExpertPenaltyScale); } }
+		public int ExpertBossRespawn => (int)(GlobalRespawnScale * RegularRespawnTimer * BossPenaltyScale * ExpertPenaltyScale);
+
+		public override bool AcceptClientChanges(ModConfig currentConfig, int whoAmI, ref string message)
+		{
+			if(ShorterRespawn.Instance.herosMod != null)
+			{
+				if (ShorterRespawn.Instance.herosMod.Call("HasPermission", whoAmI, ShorterRespawn.ModifyGlobalRespawnTime_Permission) is bool result && result)
+					return true;
+				message = $"You lack the \"{ShorterRespawn.ModifyGlobalRespawnTime_Display}\" permission.";
+				return false;
+			}
+			return base.AcceptClientChanges(currentConfig, whoAmI, ref message);
+		}
 	}
 }
