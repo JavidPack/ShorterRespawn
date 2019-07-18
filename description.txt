@@ -1,3 +1,9 @@
-﻿Cuts the respawn time after death in Expert Mode to be much closer to Normal Mode times.
+﻿This mod allow customizing respawn time after death. The respawn times can be configured in-game.
+
+Tweak "Expert Mode Penalty Scale" and "Boss Penalty Scale" if you'd like expert and boss deaths to be less penalized. Tweak "Global Respawn Scale" to lower all respawn times.
+
+The "Shorter Respawn Preset" is the default behavior and matches previous versions of this mod.
 
 When used in conjunction with either HERO's Mod or Cheat Sheet, an toggle button for instant respawns becomes available in the respective menus. When both are loaded, HERO's mod will take precedence since integration with HERO's mod allows for use of the permissions system.
+
+When using HERO's Mod, 2 new permissions will be added to the group managment. "Modify Personal Respawn Time" permits usage of the instant respawn cheat and "Modify Global Respawn Time" permits modifying the config values.
