@@ -1,21 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\references\tModLoader.targets" />
+  <Import Project="../tModLoader.targets" />
   <PropertyGroup>
     <AssemblyName>ShorterRespawn</AssemblyName>
-    <TargetFramework>net45</TargetFramework>
-    <PlatformTarget>x86</PlatformTarget>
+    <TargetFramework>net5.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <Target Name="BuildMod" AfterTargets="Build">
-    <Exec Command="&quot;$(tMLBuildServerPath)&quot; -build $(ProjectDir) -eac $(TargetPath) -define $(DefineConstants) -unsafe $(AllowUnsafeBlocks)" />
-  </Target>
   <ItemGroup>
-    <Reference Include="CheatSheet">
-      <HintPath>..\..\references\mods\CheatSheet_v0.5.0.2.dll</HintPath>
-    </Reference>
-    <Reference Include="HEROsMod">
-      <HintPath>..\..\references\mods\HEROsMod_v0.2.6.dll</HintPath>
-    </Reference>
+    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
 </Project>

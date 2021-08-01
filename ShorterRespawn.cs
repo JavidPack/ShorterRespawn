@@ -6,6 +6,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using Terraria.ModLoader.Config;
 using System.Runtime.Serialization;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ShorterRespawn
 {
@@ -25,8 +26,10 @@ namespace ShorterRespawn
 		public override void Load()
 		{
 			Instance = this;
+			/*
 			cheatSheet = ModLoader.GetMod("CheatSheet");
 			herosMod = ModLoader.GetMod("HEROsMod");
+			*/
 		}
 
 		public override void Unload() {
@@ -36,6 +39,7 @@ namespace ShorterRespawn
 		// We integrate with other mods in PostSetupContent.
 		public override void PostSetupContent()
 		{
+			/*
 			try
 			{
 				// Prefer Heros Mod
@@ -60,6 +64,7 @@ namespace ShorterRespawn
 				Logger.Warn("ShorterRespawn PostSetupContent Error: " + e.StackTrace + e.Message);
 			}
 			instantRespawn = false;
+			*/
 		}
 
 		// This is the old, not-so-convenient way of doing things, using the Mod.Call method.
@@ -81,11 +86,13 @@ namespace ShorterRespawn
 		// The New way in 0.8.3.1
 		private void SetupCheatSheetIntegration(Mod cheatSheet)
 		{
+			/*
 			// Don't GetTexture in Server code.
 			if (!Main.dedServ)
 			{
 				CheatSheet.CheatSheetInterface.RegisterButton(cheatSheet, GetTexture("InstantRespawnButton"), InstantRespawnButtonPressed, InstantRespawnTooltip);
 			}
+			*/
 		}
 
 		private void SetupHEROsModIntegration(Mod herosMod)
@@ -114,7 +121,7 @@ namespace ShorterRespawn
 					// Name of Permission governing the availability of the button/tool
 					ModifyPersonalRespawnTime_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
-					GetTexture("InstantRespawnButton"),
+					ModContent.Request<Texture2D>("InstantRespawnButton"),
 					// A method that will be called when the button is clicked
 					(Action)InstantRespawnButtonPressed,
 					// A method that will be called when the player's permissions have changed
@@ -156,7 +163,7 @@ namespace ShorterRespawn
 			// If we are cheating
 			if (ShorterRespawn.Instance.instantRespawn)
 			{
-				player.respawnTimer = 0;
+				Player.respawnTimer = 0;
 				return;
 			}
 			// otherwise, if we just want the time reduced to a more typical level
@@ -165,16 +172,16 @@ namespace ShorterRespawn
 			//	player.respawnTimer = (int)(player.respawnTimer * .75);
 			//}
 
-			ShorterRespawnConfig config = mod.GetConfig<ShorterRespawnConfig>();
+			ShorterRespawnConfig config = ModContent.GetInstance<ShorterRespawnConfig>();
 
 			// Reimplement vanilla respawnTimer logic
-			player.respawnTimer = ShorterRespawnConfig.RegularRespawnTimer;
+			Player.respawnTimer = ShorterRespawnConfig.RegularRespawnTimer;
 			bool bossAlive = false;
 			if (Main.netMode != 0 && !pvp)
 			{
 				for (int k = 0; k < 200; k++)
 				{
-					if (Main.npc[k].active && (Main.npc[k].boss || Main.npc[k].type == 13 || Main.npc[k].type == 14 || Main.npc[k].type == 15) && Math.Abs(player.Center.X - Main.npc[k].Center.X) + Math.Abs(player.Center.Y - Main.npc[k].Center.Y) < 4000f)
+					if (Main.npc[k].active && (Main.npc[k].boss || Main.npc[k].type == 13 || Main.npc[k].type == 14 || Main.npc[k].type == 15) && Math.Abs(Player.Center.X - Main.npc[k].Center.X) + Math.Abs(Player.Center.Y - Main.npc[k].Center.Y) < 4000f)
 					{
 						bossAlive = true;
 						break;
@@ -183,13 +190,13 @@ namespace ShorterRespawn
 			}
 			if (bossAlive)
 			{
-				player.respawnTimer = (int)(player.respawnTimer * config.BossPenaltyScale);
+				Player.respawnTimer = (int)(Player.respawnTimer * config.BossPenaltyScale);
 			}
 			if (Main.expertMode)
 			{
-				player.respawnTimer = (int)(player.respawnTimer * config.ExpertPenaltyScale);
+				Player.respawnTimer = (int)(Player.respawnTimer * config.ExpertPenaltyScale);
 			}
-			player.respawnTimer = (int)(player.respawnTimer * config.GlobalRespawnScale);
+			Player.respawnTimer = (int)(Player.respawnTimer * config.GlobalRespawnScale);
 		}
 	}
 
