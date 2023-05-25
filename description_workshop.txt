@@ -1,0 +1,15 @@
+This mod allow customizing respawn time after death. The respawn times can be configured in-game.
+
+Tweak "Expert Mode Penalty Scale" and "Boss Penalty Scale" if you'd like expert and boss deaths to be less penalized. Tweak "Global Respawn Scale" to lower all respawn times.
+
+The "Shorter Respawn Preset" is the default behavior and matches previous versions of this mod.
+
+When used in conjunction with either HERO's Mod or Cheat Sheet, an toggle button for instant respawns becomes available in the respective menus. When both are loaded, HERO's mod will take precedence since integration with HERO's mod allows for use of the permissions system.
+
+When using HERO's Mod, 2 new permissions will be added to the group managment. "Modify Personal Respawn Time" permits usage of the instant respawn cheat and "Modify Global Respawn Time" permits modifying the config values.
+
+[h1]Links[/h1]
+Source code hosted on [url=github.com/JavidPack/ShorterRespawn]GitHub[/url], collaboration welcome
+For questions or suggestions, come to my Discord: [url=discord.gg/w8Hcwby][img]https://discordapp.com/api/guilds/276235094622994433/widget.png?style=shield[/img][/url]
+Bug reports in the comments here will not be seen, come to Discord or Github to report issues.
+If you'd like to support my mods, I have a Patreon [url=www.patreon.com/jopojelly][img]https://i.imgur.com/xII2DwJ.png[/img][/url]
