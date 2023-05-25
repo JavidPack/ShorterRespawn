@@ -2,6 +2,7 @@
 using Terraria;
 using System;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.Localization;
 
 namespace ShorterRespawn
 {
@@ -14,17 +15,15 @@ namespace ShorterRespawn
 		internal Mod cheatSheet;
 		internal Mod herosMod;
 		internal const string ModifyPersonalRespawnTime_Permission = "ModifyPersonalRespawnTime";
-		internal const string ModifyPersonalRespawnTime_Display = "Modify Personal Respawn Time";
+		internal const string ModifyPersonalRespawnTime_Display = "Modify Personal Respawn Time"; // TODO: Heros needs to support localization keys.
 		internal const string ModifyGlobalRespawnTime_Permission = "ModifyGlobalRespawnTime";
 		internal const string ModifyGlobalRespawnTime_Display = "Modify Global Respawn Time";
 
 		public override void Load()
 		{
 			Instance = this;
-			/*
-			cheatSheet = ModLoader.GetMod("CheatSheet");
-			herosMod = ModLoader.GetMod("HEROsMod");
-			*/
+			ModLoader.TryGetMod("CheatSheet", out cheatSheet);
+			ModLoader.TryGetMod("HEROsMod", out herosMod);
 		}
 
 		public override void Unload() {
@@ -34,20 +33,19 @@ namespace ShorterRespawn
 		// We integrate with other mods in PostSetupContent.
 		public override void PostSetupContent()
 		{
-			/*
 			try
 			{
 				// Prefer Heros Mod
 				if (herosMod != null)
 				{
 					//ErrorLogger.Log("Integrating with HEROs Mod");
-					SetupHEROsModIntegration(herosMod);
+					SetupHEROsModIntegration();
 				}
 				// If Heros isn't available, try CheatSheet
 				else if (cheatSheet != null)
 				{
 					//ErrorLogger.Log("Integrating with Cheat Sheet");
-					SetupCheatSheetIntegration(cheatSheet);
+					CheatSheetIntegration.SetupCheatSheetIntegration();
 				}
 				else
 				{
@@ -59,7 +57,6 @@ namespace ShorterRespawn
 				Logger.Warn("ShorterRespawn PostSetupContent Error: " + e.StackTrace + e.Message);
 			}
 			instantRespawn = false;
-			*/
 		}
 
 		// This is the old, not-so-convenient way of doing things, using the Mod.Call method.
@@ -78,19 +75,7 @@ namespace ShorterRespawn
 			instantRespawn = false;
 		}*/
 
-		// The New way in 0.8.3.1
-		private void SetupCheatSheetIntegration(Mod cheatSheet)
-		{
-			/*
-			// Don't GetTexture in Server code.
-			if (!Main.dedServ)
-			{
-				CheatSheet.CheatSheetInterface.RegisterButton(cheatSheet, GetTexture("InstantRespawnButton"), InstantRespawnButtonPressed, InstantRespawnTooltip);
-			}
-			*/
-		}
-
-		private void SetupHEROsModIntegration(Mod herosMod)
+		private void SetupHEROsModIntegration()
 		{
 			// Add Permissions always. 
 			herosMod.Call(
@@ -116,7 +101,7 @@ namespace ShorterRespawn
 					// Name of Permission governing the availability of the button/tool
 					ModifyPersonalRespawnTime_Permission,
 					// Texture of the button. 38x38 is recommended for HERO's Mod. Also, a white outline on the icon similar to the other icons will look good.
-					ModContent.Request<Texture2D>("InstantRespawnButton"),
+					Assets.Request<Texture2D>("InstantRespawnButton", ReLogic.Content.AssetRequestMode.ImmediateLoad),
 					// A method that will be called when the button is clicked
 					(Action)InstantRespawnButtonPressed,
 					// A method that will be called when the player's permissions have changed
@@ -130,13 +115,14 @@ namespace ShorterRespawn
 		// This method is called when the cursor is hovering over the button in Heros mod or Cheat Sheet
 		public string InstantRespawnTooltip()
 		{
-			return instantRespawn ? "Disable Instant Respawn" : "Enable Instant Respawn";
+			return Language.GetTextValue(GetLocalizationKey(instantRespawn ? "DisableInstantRespawn" : "EnableInstantRespawn"));
 		}
 
 		// This method is called when the button is pressed using Heros mod or Cheat Sheet
 		public void InstantRespawnButtonPressed()
 		{
 			instantRespawn = !instantRespawn;
+			// TODO: message
 		}
 
 		// This method is called when Permissions change while using HERO's Mod.

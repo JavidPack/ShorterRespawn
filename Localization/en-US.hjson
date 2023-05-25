@@ -1,8 +1,12 @@
 Mods: {
 	ShorterRespawn: {
+		DisableInstantRespawn: Disable Instant Respawn
+		EnableInstantRespawn: Enable Instant Respawn
+
 		Configs: {
 			ShorterRespawnConfig: {
 				DisplayName: Shorter Respawn Config
+				YouLackTheXPermission: You lack the "{0}" permission.
 
 				Headers: {
 					Presets: Presets

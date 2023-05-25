@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
 namespace ShorterRespawn
@@ -87,7 +88,7 @@ namespace ShorterRespawn
 			{
 				if (ShorterRespawn.Instance.herosMod.Call("HasPermission", whoAmI, ShorterRespawn.ModifyGlobalRespawnTime_Permission) is bool result && result)
 					return true;
-				message = $"You lack the \"{ShorterRespawn.ModifyGlobalRespawnTime_Display}\" permission.";
+				message = this.GetLocalization("YouLackTheXPermission").Format(ShorterRespawn.ModifyGlobalRespawnTime_Display);
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);
