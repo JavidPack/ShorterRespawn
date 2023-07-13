@@ -1,3 +1,5 @@
+[img]https://i.imgur.com/W2c5CX6.gif[/img]
+
 This mod allow customizing respawn time after death. The respawn times can be configured in-game.
 
 Tweak "Expert Mode Penalty Scale" and "Boss Penalty Scale" if you'd like expert and boss deaths to be less penalized. Tweak "Global Respawn Scale" to lower all respawn times.
@@ -13,3 +15,4 @@ Source code hosted on [url=github.com/JavidPack/ShorterRespawn]GitHub[/url], col
 For questions or suggestions, come to my Discord: [url=discord.gg/w8Hcwby][img]https://discordapp.com/api/guilds/276235094622994433/widget.png?style=shield[/img][/url]
 Bug reports in the comments here will not be seen, come to Discord or Github to report issues.
 If you'd like to support my mods, I have a Patreon [url=www.patreon.com/jopojelly][img]https://i.imgur.com/xII2DwJ.png[/img][/url]
+[url=https://steamcommunity.com/profiles/76561198025715866/myworkshopfiles/?appid=1281930]Check out all my mods[/url]
