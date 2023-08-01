@@ -6,7 +6,7 @@ Mods: {
 		Configs: {
 			ShorterRespawnConfig: {
 				DisplayName: Конфигурация возрождения
-				YouLackTheXPermission: Вам не хватает разрешения "{0}".
+				YouLackTheXPermission: Вы не являетесь владельцем сервера "{0}".
 
 				Headers: {
 					Presets: Примеры
@@ -16,7 +16,7 @@ Mods: {
 
 				ShorterRespawnPreset: {
 					Label: "[i:889] Быстрое возрождение из мода"
-					Tooltip: Уменьшает задержку респавна из эксперт мода и используется по умолчанию.
+					Tooltip: Уменьшает время возрождения эксперт мода и используется по умолчанию.
 				}
 
 				TerrariaDefaultsPreset: {
