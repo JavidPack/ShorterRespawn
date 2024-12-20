@@ -5,5 +5,5 @@ homepage = http://forums.terraria.org/index.php?threads/shorter-respawn-time.459
 hideCode = false
 hideResources = false
 includeSource = true
-buildIgnore = .vs\*, Properties\*, ignore\*, *.csproj, *.user, lib\*, .gitignore
+buildIgnore = .vs\*, Properties\*, ignore\*, *.csproj, *.user, lib\*, .gitignore, Publicity\*
 weakReferences = CheatSheet@0.7.4.7

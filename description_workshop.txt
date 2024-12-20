@@ -6,6 +6,8 @@ Tweak "Expert Mode Penalty Scale" and "Boss Penalty Scale" if you'd like expert 
 
 The "Shorter Respawn Preset" is the default behavior and matches previous versions of this mod.
 
+[video mp4=https://github.com/user-attachments/assets/82a0d82f-16ea-4e40-ab87-7e63ee7f8f33][/video]
+
 When used in conjunction with either HERO's Mod or Cheat Sheet, an toggle button for instant respawns becomes available in the respective menus. When both are loaded, HERO's mod will take precedence since integration with HERO's mod allows for use of the permissions system.
 
 When using HERO's Mod, 2 new permissions will be added to the group managment. "Modify Personal Respawn Time" permits usage of the instant respawn cheat and "Modify Global Respawn Time" permits modifying the config values.
