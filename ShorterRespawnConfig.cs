@@ -83,7 +83,7 @@ namespace ShorterRespawn
 		public float ExpertBossRespawn => GlobalRespawnScale * RegularRespawnTimer * BossPenaltyScale * ExpertPenaltyScale / 60;
 
 		[Header("NumberVersion")]
-		[DefaultValue(true)]
+		[DefaultValue(false)]
 		public bool UseNumbers { get; set; }
 
         [DefaultValue(10)]
