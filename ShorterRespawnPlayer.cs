@@ -56,12 +56,10 @@ namespace ShorterRespawn
 			{
 				if (!bossAlive)
 				{
-					Main.NewText("Boss is Not Alive");
 					Player.respawnTimer = config.NormalRespawnTime * 60;
 					if (Main.expertMode) { Player.respawnTimer = config.ExpertRespawnTime * 60; }
 				} else
 				{
-					Main.NewText("Boss is Still Alive");
                     Player.respawnTimer = config.NormalBossRespawnTime * 60;
                     if (Main.expertMode) { Player.respawnTimer = config.ExpertBossRespawnTime * 60; }
                 }
