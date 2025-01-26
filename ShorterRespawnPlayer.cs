@@ -2,6 +2,7 @@
 using Terraria;
 using System;
 using Terraria.DataStructures;
+using Terraria.ID;
 
 namespace ShorterRespawn
 {
@@ -27,26 +28,44 @@ namespace ShorterRespawn
 			// Reimplement vanilla respawnTimer logic
 			Player.respawnTimer = ShorterRespawnConfig.RegularRespawnTimer;
 			bool bossAlive = false;
-			if (Main.netMode != 0 && !pvp)
+            if (Main.netMode != NetmodeID.SinglePlayer && !pvp)
 			{
-				for (int k = 0; k < 200; k++)
+				for (int k = 0; k < Main.npc.Length - 1; k++)
 				{
-					if (Main.npc[k].active && (Main.npc[k].boss || Main.npc[k].type == 13 || Main.npc[k].type == 14 || Main.npc[k].type == 15) && Math.Abs(Player.Center.X - Main.npc[k].Center.X) + Math.Abs(Player.Center.Y - Main.npc[k].Center.Y) < 4000f)
+					//check if there is a boss alive, and the player is close enough to it
+					if (Main.npc[k].active && (Main.npc[k].boss || Main.npc[k].type == NPCID.EaterofWorldsHead || Main.npc[k].type == NPCID.EaterofWorldsBody || Main.npc[k].type == NPCID.EaterofWorldsTail) && Math.Abs(Player.Center.X - Main.npc[k].Center.X) + Math.Abs(Player.Center.Y - Main.npc[k].Center.Y) < 4000f)
 					{
 						bossAlive = true;
 						break;
 					}
 				}
 			}
-			if (bossAlive)
+
+			if (!config.UseNumbers)
 			{
-				Player.respawnTimer = (int)(Player.respawnTimer * config.BossPenaltyScale);
-			}
-			if (Main.expertMode)
+				if (bossAlive)
+				{
+					Player.respawnTimer = (int)(Player.respawnTimer * config.BossPenaltyScale);
+				}
+				if (Main.expertMode)
+				{
+					Player.respawnTimer = (int)(Player.respawnTimer * config.ExpertPenaltyScale);
+				}
+				Player.respawnTimer = (int)(Player.respawnTimer * config.GlobalRespawnScale);
+			} else
 			{
-				Player.respawnTimer = (int)(Player.respawnTimer * config.ExpertPenaltyScale);
+				if (!bossAlive)
+				{
+					Main.NewText("Boss is Not Alive");
+					Player.respawnTimer = config.NormalRespawnTime * 60;
+					if (Main.expertMode) { Player.respawnTimer = config.ExpertRespawnTime * 60; }
+				} else
+				{
+					Main.NewText("Boss is Still Alive");
+                    Player.respawnTimer = config.NormalBossRespawnTime * 60;
+                    if (Main.expertMode) { Player.respawnTimer = config.ExpertBossRespawnTime * 60; }
+                }
 			}
-			Player.respawnTimer = (int)(Player.respawnTimer * config.GlobalRespawnScale);
 		}
 	}
 }

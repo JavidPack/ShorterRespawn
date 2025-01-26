@@ -10,8 +10,8 @@ namespace ShorterRespawn
 	{
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
-		// Vanilla RespawnTime
-		public const int RegularRespawnTimer = 600;
+        // Vanilla RespawnTime
+        public const int RegularRespawnTimer = 600;
 
 		[Header("Presets")]
 		[JsonIgnore]
@@ -82,7 +82,28 @@ namespace ShorterRespawn
 		[TooltipKey(DefaultRespawnTimeTooltip), TooltipArgs(30)]
 		public float ExpertBossRespawn => GlobalRespawnScale * RegularRespawnTimer * BossPenaltyScale * ExpertPenaltyScale / 60;
 
-		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref string message)
+		[Header("NumberVersion")]
+		[DefaultValue(true)]
+		public bool UseNumbers { get; set; }
+
+        [DefaultValue(10)]
+        [TooltipArgs(10)]
+        public int NormalRespawnTime { get; set; }
+
+        [DefaultValue(15)]
+        [TooltipArgs(15)]
+        public int ExpertRespawnTime { get; set; }
+
+        [DefaultValue(20)]
+        [TooltipArgs(20)]
+        public int NormalBossRespawnTime { get; set; }
+
+        [DefaultValue(30)]
+        [TooltipArgs(30)]
+        public int ExpertBossRespawnTime { get; set; }
+
+        //check if the client has the hero's mod permission to modify the config options
+        public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref string message)
 		{
 			if(ShorterRespawn.Instance.herosMod != null && ShorterRespawn.Instance.herosMod.Version >= new Version(0, 2, 2))
 			{
@@ -93,5 +114,5 @@ namespace ShorterRespawn
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);
 		}
-	}
+    }
 }

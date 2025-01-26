@@ -12,6 +12,7 @@ Mods: {
 					// Presets: Presets
 					// ConfigurableRespawnScales: Configurable Respawn Scales
 					// ResultingRespawnTimes: Resulting Respawn Times
+					// NumberVersion: Number Version
 				}
 
 				ShorterRespawnPreset: {
@@ -44,6 +45,51 @@ Mods: {
 				// NormalBossRespawn.Label: Normal Boss Respawn Time in Seconds
 				// ExpertRespawn.Label: Expert Respawn Time in Seconds
 				// ExpertBossRespawn.Label: Expert Boss Respawn Time in Seconds
+
+				UseNumbers: {
+					// Label: "[i:2703] Use Numbers Instead"
+					/* Tooltip:
+						'''
+						Use the numbers instead of the sliders. 
+						Enabling this will ignore the sliders and the presets.
+						''' */
+				}
+
+				NormalRespawnTime: {
+					// Label: "[i:2019] Normal Respawn Time"
+					/* Tooltip:
+						'''
+						Set the normal respawn timer, in seconds.
+						The default time is {0} seconds.
+						''' */
+				}
+
+				ExpertRespawnTime: {
+					// Label: "[i:243] Expert Respawn Time"
+					/* Tooltip:
+						'''
+						Set the expert respawn timer, in seconds.
+						The default time is {0} Seconds.
+						''' */
+				}
+
+				NormalBossRespawnTime: {
+					// Label: "[i: 2105] Normal Boss Respawn Time"
+					/* Tooltip:
+						'''
+						Set the normal respawn timer, in seconds, when a boss is alive.
+						The default time is {0} Seconds.
+						''' */
+				}
+
+				ExpertBossRespawnTime: {
+					// Label: "[i:3335] Expert Boss Respawn Time"
+					/* Tooltip:
+						'''
+						Set the expert respawn timer, in seconds, when a boss is alive.
+						The default time is {0} Seconds.
+						''' */
+				}
 			}
 		}
 	}
