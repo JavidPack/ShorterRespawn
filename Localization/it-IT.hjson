@@ -12,7 +12,8 @@ Mods: {
 					// Presets: Presets
 					// ConfigurableRespawnScales: Configurable Respawn Scales
 					// ResultingRespawnTimes: Resulting Respawn Times
-					// NumberVersion: Number Version
+					// ExactSecondsAlternative: Exact Seconds Alternative
+					// Tweaks: Tweaks
 				}
 
 				ShorterRespawnPreset: {
@@ -46,11 +47,11 @@ Mods: {
 				// ExpertRespawn.Label: Expert Respawn Time in Seconds
 				// ExpertBossRespawn.Label: Expert Boss Respawn Time in Seconds
 
-				UseNumbers: {
-					// Label: "[i:2703] Use Numbers Instead"
+				UseSeconds: {
+					// Label: "[i:2703] Use Exact Seconds Instead"
 					/* Tooltip:
 						'''
-						Use the numbers instead of the sliders. 
+						Set respawn time values directly instead of the sliders. 
 						Enabling this will ignore the sliders and the presets.
 						''' */
 				}
@@ -69,7 +70,7 @@ Mods: {
 					/* Tooltip:
 						'''
 						Set the expert respawn timer, in seconds.
-						The default time is {0} Seconds.
+						The default time is {0} seconds.
 						''' */
 				}
 
@@ -78,7 +79,7 @@ Mods: {
 					/* Tooltip:
 						'''
 						Set the normal respawn timer, in seconds, when a boss is alive.
-						The default time is {0} Seconds.
+						The default time is {0} seconds.
 						''' */
 				}
 
@@ -87,7 +88,16 @@ Mods: {
 					/* Tooltip:
 						'''
 						Set the expert respawn timer, in seconds, when a boss is alive.
-						The default time is {0} Seconds.
+						The default time is {0} seconds.
+						''' */
+				}
+
+				AdjustRespawnTimeWhenBossDespawns: {
+					// Label: "[i:WispinaBottle]Adjust Respawn Time When Boss Despawns"
+					/* Tooltip:
+						'''
+						If all bosses leave while you are dead,
+						the respawn time will lower to the non-boss respawn time automatically.
 						''' */
 				}
 			}

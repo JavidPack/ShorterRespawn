@@ -9,28 +9,7 @@ namespace ShorterRespawn
 	// This class is the actual mod code that reduces the respawn timer when the player dies.
 	public class ShorterRespawnPlayer : ModPlayer
 	{
-		bool AnyBossAlive(bool pvp = false, bool careAboutRange = true) {
-			if (!pvp) {
-				for (int k = 0; k < Main.npc.Length - 1; k++) {
-					//check if there is a boss alive
-					if (Main.npc[k].active && (Main.npc[k].boss || Main.npc[k].type == NPCID.EaterofWorldsHead || Main.npc[k].type == NPCID.EaterofWorldsBody || Main.npc[k].type == NPCID.EaterofWorldsTail)) {
-						//check if the range matters
-						if (careAboutRange) {
-							//check if the player is within the range of the boss
-							if (Math.Abs(Player.Center.X - Main.npc[k].Center.X) + Math.Abs(Player.Center.Y - Main.npc[k].Center.Y) < 4000f)
-								return true;
-							else
-								return false;
-						}
-						else
-							return true;
-					}
-				}
-			}
-
-			return false;
-		}
-		ShorterRespawnConfig config = ModContent.GetInstance<ShorterRespawnConfig>();
+		private ShorterRespawnConfig config = ModContent.GetInstance<ShorterRespawnConfig>();
 
 		public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
 			// If we are cheating
@@ -50,7 +29,7 @@ namespace ShorterRespawn
 			//check if any boss is alive
 			bool bossAlive = AnyBossAlive(pvp);
 
-			if (!config.UseNumbers) {
+			if (!config.UseSeconds) {
 				if (bossAlive) {
 					Player.respawnTimer = (int)(Player.respawnTimer * config.BossPenaltyScale);
 				}
@@ -60,39 +39,63 @@ namespace ShorterRespawn
 				Player.respawnTimer = (int)(Player.respawnTimer * config.GlobalRespawnScale);
 			}
 			else {
-				if (!bossAlive) {
-					Player.respawnTimer = config.NormalRespawnTime * 60;
-					if (Main.expertMode) { Player.respawnTimer = config.ExpertRespawnTime * 60; }
+				if (bossAlive) {
+					Player.respawnTimer = (Main.expertMode ? config.ExpertBossRespawnTime : config.NormalBossRespawnTime) * 60;
 				}
 				else {
-					Player.respawnTimer = config.NormalBossRespawnTime * 60;
-					if (Main.expertMode) { Player.respawnTimer = config.ExpertBossRespawnTime * 60; }
+					Player.respawnTimer = (Main.expertMode ? config.ExpertRespawnTime : config.NormalRespawnTime) * 60;
 				}
 			}
 		}
 
-		//used to shorten the respawn timer when the boss despawn
+		// used to shorten the respawn timer when the boss despawn
 		public override void UpdateDead() {
-			//check if any boss is alive
+			if (!config.AdjustRespawnTimeWhenBossDespawns)
+				return;
+
+			// check if any boss is alive
 			bool bossAlive = AnyBossAlive(careAboutRange: false);
 			if (!bossAlive) {
-				//check if the number system is being used
-				if (config.UseNumbers) {
-					//set the respawn timer to the non boss one if it's still above it based on expert
+				// check if the number system is being used
+				if (config.UseSeconds) {
+					// set the respawn timer to the non boss one if it's still above it based on expert
 					if (Main.expertMode && Player.respawnTimer > config.ExpertRespawnTime * 60)
 						Player.respawnTimer = config.ExpertRespawnTime * 60;
-
-					else if (Player.respawnTimer > config.NormalRespawnTime * 60)
+					else if (!Main.expertMode && Player.respawnTimer > config.NormalRespawnTime * 60)
 						Player.respawnTimer = config.NormalRespawnTime * 60;
 				}
 				else {
-					//set the respawn timer to the non boss one if it's still above it
-					if (Main.expertMode && Player.respawnTimer > config.ExpertRespawn * 60) { Player.respawnTimer = (int)config.ExpertRespawn * 60; }
-
-					else if (Player.respawnTimer > config.NormalRespawn * 60) { Player.respawnTimer = (int)config.NormalRespawn * 60; }
+					// set the respawn timer to the non boss one if it's still above it
+					if (Main.expertMode && Player.respawnTimer > config.ExpertRespawn * 60)
+						Player.respawnTimer = (int)config.ExpertRespawn * 60;
+					else if (!Main.expertMode && Player.respawnTimer > config.NormalRespawn * 60)
+						Player.respawnTimer = (int)config.NormalRespawn * 60;
 				}
 			}
-			base.UpdateDead();
+		}
+
+		private bool AnyBossAlive(bool pvp = false, bool careAboutRange = true) {
+			if (pvp) {
+				return false;
+			}
+			for (int k = 0; k < Main.npc.Length - 1; k++) {
+				// check if there is a boss alive
+				if (Main.npc[k].active && (Main.npc[k].boss || Main.npc[k].type == NPCID.EaterofWorldsHead || Main.npc[k].type == NPCID.EaterofWorldsBody || Main.npc[k].type == NPCID.EaterofWorldsTail)) {
+					// check if the range matters
+					if (careAboutRange) {
+						// check if the player is within the range of the boss
+						if (Math.Abs(Player.Center.X - Main.npc[k].Center.X) + Math.Abs(Player.Center.Y - Main.npc[k].Center.Y) < 4000f)
+							return true;
+						else
+							return false;
+					}
+					else {
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 	}
 }
