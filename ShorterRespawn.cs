@@ -3,6 +3,8 @@ using Terraria;
 using System;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.Localization;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace ShorterRespawn
 {
@@ -18,13 +20,15 @@ namespace ShorterRespawn
 		internal const string ModifyPersonalRespawnTime_Display = "Modify Personal Respawn Time"; // TODO: Heros needs to support localization keys.
 		internal const string ModifyGlobalRespawnTime_Permission = "ModifyGlobalRespawnTime";
 		internal const string ModifyGlobalRespawnTime_Display = "Modify Global Respawn Time";
+		internal const int MaxRespawnTime = int.MaxValue;
 
 		public override void Load()
 		{
 			Instance = this;
 			ModLoader.TryGetMod("CheatSheet", out cheatSheet);
 			ModLoader.TryGetMod("HEROsMod", out herosMod);
-		}
+            IL_Player.UpdateDead += PreventClamping;
+        }
 
 		public override void Unload() {
 			Instance = null;
@@ -134,5 +138,17 @@ namespace ShorterRespawn
 				instantRespawn = false;
 			}
 		}
-	}
+
+        private void PreventClamping(ILContext il)
+        {
+            ILCursor c = new(il);
+
+            // Replace all instances of the vanilla max respawn time with this one.
+            while (c.TryGotoNext(MoveType.After, i => i.MatchLdcI4(3600)))
+            {
+                c.Emit(OpCodes.Pop);
+                c.Emit(OpCodes.Ldc_I4, MaxRespawnTime);
+            }
+        }
+    }
 }
