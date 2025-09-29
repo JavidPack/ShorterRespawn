@@ -1,5 +1,5 @@
 ﻿author = jopojelly
-version = 1.2
+version = 1.2.1
 displayName = Shorter Respawn Time
 homepage = http://forums.terraria.org/index.php?threads/shorter-respawn-time.45962/
 hideCode = false
