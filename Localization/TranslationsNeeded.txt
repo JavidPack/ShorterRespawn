@@ -2,7 +2,7 @@ en-US, 35/35, 100%, missing 0
 de-DE, 0/35, 0%, missing 35
 it-IT, 0/35, 0%, missing 35
 fr-FR, 0/35, 0%, missing 35
-es-ES, 0/35, 0%, missing 35
+es-ES, 35/35, 100%, missing 0
 ru-RU, 21/35, 60%, missing 14
 zh-Hans, 0/35, 0%, missing 35
 pt-BR, 0/35, 0%, missing 35

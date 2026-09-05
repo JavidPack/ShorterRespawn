@@ -18,7 +18,7 @@ Mods: {
 
 				ShorterRespawnPreset: {
 					Label: "[i:889] Preajuste de reaparición más corto"
-					Tooltip: 
+					Tooltip:
 						'''
 						Este ajuste preestablecido reduce solo la penalización en [c/ec5353:modo experto].
 						Esta opción está activa por defecto.
@@ -37,7 +37,7 @@ Mods: {
 
 				ExpertPenaltyScale: {
 					Label: "[i:3233] Escala de penalización del modo experto"
-					Tooltip: 
+					Tooltip:
 						'''
 						Penalización por tiempo de reaparición adicional en [c/ec5353:modo experto].
 						El valor predeterminado de Terraria es 1,5.
@@ -46,7 +46,7 @@ Mods: {
 
 				BossPenaltyScale: {
 					Label: "[i:43] Escala de penalizaciones del jefe"
-					Tooltip: 
+					Tooltip:
 						'''
 						Penalización por tiempo de reaparición adicional por muertes durante peleas con jefes.
 						El valor predeterminado de Terraria es 2.
