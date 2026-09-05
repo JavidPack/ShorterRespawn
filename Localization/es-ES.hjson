@@ -1,104 +1,116 @@
 Mods: {
 	ShorterRespawn: {
-		// DisableInstantRespawn: Disable Instant Respawn
-		// EnableInstantRespawn: Enable Instant Respawn
+		DisableInstantRespawn: Desactivar reaparición instantánea
+		EnableInstantRespawn: Activar reaparición instantánea
 
 		Configs: {
 			ShorterRespawnConfig: {
-				// DisplayName: Shorter Respawn Config
-				// YouLackTheXPermission: You lack the "{0}" permission.
+				DisplayName: Configuración de Shorter Respawn
+				YouLackTheXPermission: Te falta el permiso "{0}".
 
 				Headers: {
-					// Presets: Presets
-					// ConfigurableRespawnScales: Configurable Respawn Scales
-					// ResultingRespawnTimes: Resulting Respawn Times
-					// ExactSecondsAlternative: Exact Seconds Alternative
-					// Tweaks: Tweaks
+					Presets: Preajustes
+					ConfigurableRespawnScales: Configuración de la escala de reaparición
+					ResultingRespawnTimes: Tiempos de reaparición resultantes
+					ExactSecondsAlternative: Alternativa de segundos exactos
+					Tweaks: Ajustes
 				}
 
 				ShorterRespawnPreset: {
-					// Label: "[i:889] Shorter Respawn Preset"
-					// Tooltip: This preset reduces only Expert Penalty and is the default.
+					Label: "[i:889] Preajuste de reaparición más corto"
+					Tooltip: 
+						'''
+						Este ajuste preestablecido reduce solo la penalización en [c/ec5353:modo experto].
+						Esta opción está activa por defecto.
+						'''
 				}
 
 				TerrariaDefaultsPreset: {
-					// Label: "[i:3099] Terraria Defaults Preset"
-					// Tooltip: This preset restores the default Terraria behavior.
+					Label: "[i:3099] Valores predeterminados de Terraria"
+					Tooltip: El tiempo de reaparición, es el mismo que tiene Terraria de manera predeterminada.
 				}
 
 				GlobalRespawnScale: {
-					// Label: "[i:1175] Global Respawn Scale"
-					// Tooltip: ""
+					Label: "[i:1175] Escala de reaparición global"
+					Tooltip: ""
 				}
 
 				ExpertPenaltyScale: {
-					// Label: "[i:3233] Expert Mode Penalty Scale"
-					// Tooltip: Extra respawn time penalty while in Expert Mode. Default Terraria value is 1.5.
+					Label: "[i:3233] Escala de penalización del modo experto"
+					Tooltip: 
+						'''
+						Penalización por tiempo de reaparición adicional en [c/ec5353:modo experto].
+						El valor predeterminado de Terraria es 1,5.
+						'''
 				}
 
 				BossPenaltyScale: {
-					// Label: "[i:43] Boss Penalty Scale"
-					// Tooltip: Extra respawn time penalty for deaths during boss fights. Default Terraria value is 2.
+					Label: "[i:43] Escala de penalizaciones del jefe"
+					Tooltip: 
+						'''
+						Penalización por tiempo de reaparición adicional por muertes durante peleas con jefes.
+						El valor predeterminado de Terraria es 2.
+						'''
 				}
 
-				// DefaultRespawnTimeTooltip: Default Terraria time is {0} seconds
-				// NormalRespawn.Label: Normal Respawn Time in Seconds
-				// NormalBossRespawn.Label: Normal Boss Respawn Time in Seconds
-				// ExpertRespawn.Label: Expert Respawn Time in Seconds
-				// ExpertBossRespawn.Label: Expert Boss Respawn Time in Seconds
+				DefaultRespawnTimeTooltip: El tiempo predeterminado de Terraria es {0} segundos
+				NormalRespawn.Label: Tiempo de reaparición normal en segundos
+				NormalBossRespawn.Label: Tiempo de reaparición contra un jefe, en normal. seg
+				ExpertRespawn.Label: Tiempo de reaparición experto en segundos
+				ExpertBossRespawn.Label: Tiempo de reaparición contra un jefe, en experto, seg
 
 				UseSeconds: {
-					// Label: "[i:2703] Use Exact Seconds Instead"
-					/* Tooltip:
+					Label: "[i:2703] Utilizar segundos exactos"
+					Tooltip:
 						'''
-						Set respawn time values directly instead of the sliders. 
-						Enabling this will ignore the sliders and the presets.
-						''' */
+						Establezca los valores de tiempo de reaparición directamente en lugar de los controles deslizantes.
+						Al habilitar esta opción se ignorarán los controles deslizantes y los ajustes preestablecidos.
+						'''
 				}
 
 				NormalRespawnTime: {
-					// Label: "[i:2019] Normal Respawn Time"
-					/* Tooltip:
+					Label: "[i:2019] Tiempo de reaparición en modo normal"
+					Tooltip:
 						'''
-						Set the normal respawn timer, in seconds.
-						The default time is {0} seconds.
-						''' */
+						Establece el temporizador de reaparición en dificultad normal, en segundos.
+						El tiempo predeterminado es {0} segundos.
+						'''
 				}
 
 				ExpertRespawnTime: {
-					// Label: "[i:243] Expert Respawn Time"
-					/* Tooltip:
+					Label: "[i:243] Tiempo de reaparición en modo experto"
+					Tooltip:
 						'''
-						Set the expert respawn timer, in seconds.
-						The default time is {0} seconds.
-						''' */
+						Establezca el temporizador de reaparición en [c/ec5353:modo experto], en segundos.
+						El tiempo predeterminado es {0} segundos.
+						'''
 				}
 
 				NormalBossRespawnTime: {
-					// Label: "[i: 2105] Normal Boss Respawn Time"
-					/* Tooltip:
+					Label: "[i: 2105] Tiempo de reaparición del jefe en normal"
+					Tooltip:
 						'''
-						Set the normal respawn timer, in seconds, when a boss is alive.
-						The default time is {0} seconds.
-						''' */
+						Establece el temporizador de reaparición en dificultad normal, en segundos, cuando un jefe está vivo.
+						El tiempo predeterminado es {0} segundos.
+						'''
 				}
 
 				ExpertBossRespawnTime: {
-					// Label: "[i:3335] Expert Boss Respawn Time"
-					/* Tooltip:
+					Label: "[i:3335] Tiempo de reaparición del jefe en experto"
+					Tooltip:
 						'''
-						Set the expert respawn timer, in seconds, when a boss is alive.
-						The default time is {0} seconds.
-						''' */
+						Establece el temporizador de reaparición en [c/ec5353:modo experto], en segundos, cuando un jefe está vivo.
+						El tiempo predeterminado es {0} segundos.
+						'''
 				}
 
 				AdjustRespawnTimeWhenBossDespawns: {
-					// Label: "[i:WispinaBottle]Adjust Respawn Time When Boss Despawns"
-					/* Tooltip:
+					Label: "[i:WispinaBottle] Ajustar el tiempo de reaparición cuando el jefe queda solo"
+					Tooltip:
 						'''
-						If all bosses leave while you are dead,
-						the respawn time will lower to the non-boss respawn time automatically.
-						''' */
+						Si todos los jefes se van mientras estás muerto,
+						El tiempo de reaparición se reducirá automáticamente al tiempo de reaparición del personaje que no es el jefe.
+						'''
 				}
 			}
 		}
