@@ -1,104 +1,105 @@
 Mods: {
 	ShorterRespawn: {
-		// DisableInstantRespawn: Disable Instant Respawn
-		// EnableInstantRespawn: Enable Instant Respawn
+		DisableInstantRespawn: 禁用立刻复活
+		EnableInstantRespawn: 启用立刻复活
 
 		Configs: {
 			ShorterRespawnConfig: {
-				// DisplayName: Shorter Respawn Config
-				// YouLackTheXPermission: You lack the "{0}" permission.
+				DisplayName: Shorter Respawn配置
+				YouLackTheXPermission: 你没有"{0}"权限
 
 				Headers: {
-					// Presets: Presets
-					// ConfigurableRespawnScales: Configurable Respawn Scales
-					// ResultingRespawnTimes: Resulting Respawn Times
-					// ExactSecondsAlternative: Exact Seconds Alternative
-					// Tweaks: Tweaks
+					Presets: 预设
+					ConfigurableRespawnScales: 配置的复活时间倍率
+					ResultingRespawnTimes: 结果复活时间
+					ExactSecondsAlternative: 精确秒数设置
+					Tweaks: 调整
 				}
 
 				ShorterRespawnPreset: {
-					// Label: "[i:889] Shorter Respawn Preset"
-					// Tooltip: This preset reduces only Expert Penalty and is the default.
+					Label: "[i:889] Shorter Respawn预设"
+					Tooltip: 此预设仅降低专家模式惩罚，并作为默认预设
 				}
 
 				TerrariaDefaultsPreset: {
-					// Label: "[i:3099] Terraria Defaults Preset"
-					// Tooltip: This preset restores the default Terraria behavior.
+					Label: "[i:3099] 原版默认预设"
+					Tooltip: 此预设恢复原版的默认复活机制
 				}
 
 				GlobalRespawnScale: {
-					// Label: "[i:1175] Global Respawn Scale"
-					// Tooltip: ""
+					Label: "[i:1175] 全局复活时间倍率"
+					Tooltip: ""
 				}
 
 				ExpertPenaltyScale: {
-					// Label: "[i:3233] Expert Mode Penalty Scale"
-					// Tooltip: Extra respawn time penalty while in Expert Mode. Default Terraria value is 1.5.
+					Label: "[i:3233] 专家模式惩罚倍率"
+					Tooltip: 专家模式下额外的复活时间惩罚. 原版的默认值为1.5
 				}
 
 				BossPenaltyScale: {
-					// Label: "[i:43] Boss Penalty Scale"
-					// Tooltip: Extra respawn time penalty for deaths during boss fights. Default Terraria value is 2.
+					Label: "[i:43] Boss 惩罚倍率"
+					Tooltip: Boss战期间死亡时额外的复活时间惩罚. 原版的默认值为 2。
+
 				}
 
-				// DefaultRespawnTimeTooltip: Default Terraria time is {0} seconds
-				// NormalRespawn.Label: Normal Respawn Time in Seconds
-				// NormalBossRespawn.Label: Normal Boss Respawn Time in Seconds
-				// ExpertRespawn.Label: Expert Respawn Time in Seconds
-				// ExpertBossRespawn.Label: Expert Boss Respawn Time in Seconds
+				DefaultRespawnTimeTooltip: 原版默认复活时间为 {0} 秒
+				NormalRespawn.Label: 普通复活时间（秒）
+				NormalBossRespawn.Label: 普通Boss战复活时间(秒)
+				ExpertRespawn.Label: 专家模式复活时间（秒）
+				ExpertBossRespawn.Label: 专家模式Boss战复活时间(秒)
 
 				UseSeconds: {
-					// Label: "[i:2703] Use Exact Seconds Instead"
-					/* Tooltip:
+					Label: "[i:2703] 使用精确秒数"
+					Tooltip:
 						'''
-						Set respawn time values directly instead of the sliders. 
-						Enabling this will ignore the sliders and the presets.
-						''' */
+						直接设置复活时间，而不是使用滑块。
+						启用后将忽略滑块和预设设置。
+						'''
 				}
 
 				NormalRespawnTime: {
-					// Label: "[i:2019] Normal Respawn Time"
-					/* Tooltip:
+					Label: "[i:2019] 普通复活时间"
+					Tooltip:
 						'''
-						Set the normal respawn timer, in seconds.
-						The default time is {0} seconds.
-						''' */
+						设置普通情况下的复活时间，单位为秒。
+						默认时间为 {0} 秒。
+						'''
 				}
 
 				ExpertRespawnTime: {
-					// Label: "[i:243] Expert Respawn Time"
-					/* Tooltip:
+					Label: "[i:243] 专家模式复活时间"
+					Tooltip:
 						'''
-						Set the expert respawn timer, in seconds.
-						The default time is {0} seconds.
-						''' */
+						设置专家模式下的复活时间，单位为秒。
+						默认时间为 {0} 秒。
+						'''
 				}
 
 				NormalBossRespawnTime: {
-					// Label: "[i: 2105] Normal Boss Respawn Time"
-					/* Tooltip:
+					Label: "[i:2105] 普通Boss战复活时间"
+					Tooltip:
 						'''
-						Set the normal respawn timer, in seconds, when a boss is alive.
-						The default time is {0} seconds.
-						''' */
+						设置 Boss 存活时的普通模式复活时间，单位为秒。
+						默认时间为 {0} 秒。
+						'''
 				}
 
 				ExpertBossRespawnTime: {
-					// Label: "[i:3335] Expert Boss Respawn Time"
-					/* Tooltip:
+					Label: "[i:3335] 专家模式Boss战复活时间"
+					Tooltip:
 						'''
-						Set the expert respawn timer, in seconds, when a boss is alive.
-						The default time is {0} seconds.
-						''' */
+						设置 Boss 存活时的专家模式复活时间，单位为秒。
+						默认时间为 {0} 秒。
+						'''
 				}
 
 				AdjustRespawnTimeWhenBossDespawns: {
-					// Label: "[i:WispinaBottle]Adjust Respawn Time When Boss Despawns"
-					/* Tooltip:
+					Label: "[i:WispinaBottle] Boss离场时调整复活时间"
+					Tooltip:
 						'''
-						If all bosses leave while you are dead,
-						the respawn time will lower to the non-boss respawn time automatically.
-						''' */
+						如果你死亡时所有 Boss 都已离场，
+						复活时间将自动降低至非Boss在场状态下的复活时间。
+						'''
 				}
 			}
 		}
